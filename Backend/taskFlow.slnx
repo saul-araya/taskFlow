@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Api/">
+    <Project Path="src/Api/taskFlow.Api/taskFlow.Api.csproj" />
+    <Project Path="src/Api/taskFlow.Application/taskFlow.Application.csproj" />
+    <Project Path="src/Api/taskFlow.Domain/taskFlow.Domain.csproj" />
+    <Project Path="src/Api/taskFlow.Infrastructure/taskFlow.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/NotificationService/">
+    <Project Path="src/NotificationService/taskFlow.notification.Api/taskFlow.notification.Api.csproj" />
+    <Project Path="src/NotificationService/taskFlow.notification.Application/taskFlow.notification.Application.csproj" />
+    <Project Path="src/NotificationService/taskFlow.notification.Domain/taskFlow.notification.Domain.csproj" />
+    <Project Path="src/NotificationService/taskFlow.notification.Infrastructure/taskFlow.notification.Infrastructure.csproj" />
+  </Folder>
+</Solution>
