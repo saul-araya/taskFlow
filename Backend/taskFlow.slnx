@@ -6,6 +6,12 @@
     <Project Path="src/Api/taskFlow.Domain/taskFlow.Domain.csproj" />
     <Project Path="src/Api/taskFlow.Infrastructure/taskFlow.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/AuthApi/">
+    <Project Path="src/AuthApi/taskFlow.auth.Api/taskFlow.auth.Api.csproj" />
+    <Project Path="src/AuthApi/taskFlow.auth.Application/taskFlow.auth.Application.csproj" />
+    <Project Path="src/AuthApi/taskFlow.auth.Domain/taskFlow.auth.Domain.csproj" />
+    <Project Path="src/AuthApi/taskFlow.auth.Infrastructure/taskFlow.auth.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/NotificationService/">
     <Project Path="src/NotificationService/taskFlow.notification.Api/taskFlow.notification.Api.csproj" />
     <Project Path="src/NotificationService/taskFlow.notification.Application/taskFlow.notification.Application.csproj" />
