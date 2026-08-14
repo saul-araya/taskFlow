@@ -4,11 +4,9 @@ using taskFlow.auth.Domain.Entities;
 
 namespace taskFlow.auth.Infrastructure.Persistance;
 
-internal class AppDbContext : DbContext
+public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {
-    }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){}
 
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<UserProvider> UserProviders { get; set; } = null!;
