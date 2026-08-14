@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\taskFlow.auth.Application\taskFlow.auth.Application.csproj" />
+    <ProjectReference Include="..\taskFlow.auth.Infrastructure\taskFlow.auth.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
