@@ -8,5 +8,5 @@ public record CreateUserDto(
     string DisplayName,
     string Email,
     string? ImageLink,
-    List<CreateUserProviderItemDto> UserProviders
+    CreateUserProviderItemDto UserProvider
 ){}

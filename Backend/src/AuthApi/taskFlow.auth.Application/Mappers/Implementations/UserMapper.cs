@@ -4,9 +4,7 @@ using taskFlow.auth.Domain.Entities;
 
 namespace taskFlow.auth.Application.Mappers.Implementations;
 
-public class UserMapper(
-    IUserProviderMapper providerMapper
-) : IUserMapper
+public class UserMapper : IUserMapper
 {
     public ResUserDto MapToDto(User entity)
     {
@@ -28,8 +26,7 @@ public class UserMapper(
             DisplayName = dto.DisplayName,
             Email = dto.Email,
             ImageLink = dto.ImageLink,
-            Active = true,
-            UserProviders = [.. dto.UserProviders.Select(providerMapper.MapToEntity)]
+            Active = true
         };
     }
 

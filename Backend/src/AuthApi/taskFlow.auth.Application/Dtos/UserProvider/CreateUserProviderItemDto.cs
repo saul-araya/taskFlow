@@ -1,8 +1,10 @@
 ﻿
+using taskFlow.auth.Domain.Enums;
+
 namespace taskFlow.auth.Application.Dtos.UserProvider;
 
 public record CreateUserProviderItemDto(
-    string Provider,
+    AuthProvider Provider,
     string? ProviderUserId,
     string? Password
 ){ }

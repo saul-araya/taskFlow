@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using taskFlow.auth.Application.Interfaces;
 using taskFlow.auth.Domain.Repositories;
 using taskFlow.auth.Infrastructure.Persistance;
 using taskFlow.auth.Infrastructure.Persistance.Repositories;
+using taskFlow.auth.Infrastructure.Services;
 
 namespace taskFlow.auth.Infrastructure;
 
@@ -21,7 +23,11 @@ public static class DependencyInjection
             options.UseNpgsql(connectionString)
         );
 
+        //Repositories
         services.AddScoped<IUserRepository, UserRepository>();
+
+        //Services
+        services.AddSingleton<IEncriptionService, EncriptionService>();
 
         return services;
     }

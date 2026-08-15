@@ -21,6 +21,7 @@ public class UserProviderConfiguration : IEntityTypeConfiguration<UserProvider>
             .IsRequired();
 
         builder.Property(x => x.Provider)
+            .HasConversion<string>()
             .HasColumnName("provider")
             .HasMaxLength(50)
             .IsRequired();
