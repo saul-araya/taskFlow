@@ -26,14 +26,4 @@ public class UserRepository(
     {
         return await context.Users.FirstOrDefaultAsync(x => x.Id == id);
     }
-
-    public async Task SoftDeleteUserAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<User> UpdateUserAsync(User entity)
-    {
-        throw new NotImplementedException();
-    }
 }
