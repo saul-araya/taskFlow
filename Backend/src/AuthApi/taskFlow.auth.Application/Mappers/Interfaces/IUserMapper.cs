@@ -8,5 +8,5 @@ public interface IUserMapper
 {
     ResUserDto MapToDto(User entity);
     User MapToEntity(CreateUserDto dto);
-    User MapToUpdate(User entity, UpdateUserDto dto);
+    void MapToUpdate(User entity, UpdateUserDto dto);
 }

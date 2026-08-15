@@ -1,8 +1,10 @@
 ﻿
 using taskFlow.auth.Application.Dtos.User;
+using taskFlow.auth.Application.Exceptions;
 using taskFlow.auth.Application.Interfaces;
 using taskFlow.auth.Application.Mappers.Interfaces;
 using taskFlow.auth.Domain.Entities;
+using taskFlow.auth.Domain.Exceptions;
 using taskFlow.auth.Domain.Repositories;
 
 namespace taskFlow.auth.Application.Services;
@@ -11,32 +13,60 @@ public class UserService(
     IEncriptionService encryptionService,
     IUserMapper mapper,
     IUserProviderMapper providerMapper,
-    IUserRepository repository
+    IUserRepository repository,
+    IUnitOfWork unitOfWork
 ) : IUserService
 {
     public async Task<ResUserDto> AddUserAsync(CreateUserDto dto)
     {
-        var user = mapper.MapToEntity(dto);
-
+        var user = BuildUserWithProvider(dto);
+        await repository.AddUserAsync(user);
+        await unitOfWork.SaveChangesAsync();
+        return mapper.MapToDto(user);
     }
 
-    public async Task<ResUserDto?> FindUserByEmailAsync(string email)
+    public async Task<ResUserDto> FindUserByEmailAsync(string email)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrWhiteSpace(email)) 
+            throw new BadRequestDataException(String.Format(ApplicationExceptionMessages.InvalidData, nameof(email)));
+        var user = await repository.FindByEmailAsync(email) 
+            ?? throw new NotFoundException(ApplicationExceptionMessages.NotFound);
+        return mapper.MapToDto(user);
     }
 
-    public async Task<ResUserDto?> FindUserByIdAsync(Guid id)
+    public async Task<ResUserDto> FindUserByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return mapper.MapToDto(await FindUserById(id));
     }
 
     public async Task SoftUserDeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var user = await FindUserById(id);
+        user.Active = false;
+        await unitOfWork.SaveChangesAsync();
     }
 
-    public async Task<ResUserDto> UpdateUserAsync(UpdateUserDto dto)
+    public async Task<ResUserDto> UpdateUserAsync(UpdateUserDto dto, Guid id)
     {
-        throw new NotImplementedException();
+        var user = await FindUserById(id);
+        mapper.MapToUpdate(user, dto);
+        await unitOfWork.SaveChangesAsync();
+        return mapper.MapToDto(user);
+    }
+
+    private async Task<User> FindUserById(Guid id) => await repository.FindByIdAsync(id) ??
+            throw new NotFoundException(ApplicationExceptionMessages.NotFound);
+
+    private User BuildUserWithProvider(CreateUserDto dto)
+    {
+        var user = mapper.MapToEntity(dto);
+        var provider = providerMapper.MapToEntity(dto.UserProvider);
+
+        if (dto.UserProvider.Provider == Domain.Enums.AuthProvider.LOCAL)
+            provider.PasswordHash = encryptionService.EncryptPassword(provider.PasswordHash ?? 
+                throw new InvalidPasswordException(DomainExceptionMessages.InvalidPassword));
+
+        user.UserProviders.Add(provider);
+        return user;
     }
 }

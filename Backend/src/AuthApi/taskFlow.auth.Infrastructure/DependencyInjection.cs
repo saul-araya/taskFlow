@@ -25,6 +25,7 @@ public static class DependencyInjection
 
         //Repositories
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         //Services
         services.AddSingleton<IEncriptionService, EncriptionService>();

@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\taskFlow.auth.Application\taskFlow.auth.Application.csproj" />
     <ProjectReference Include="..\taskFlow.auth.Domain\taskFlow.auth.Domain.csproj" />
   </ItemGroup>
 

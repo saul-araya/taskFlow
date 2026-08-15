@@ -30,11 +30,10 @@ public class UserMapper : IUserMapper
         };
     }
 
-    public User MapToUpdate(User entity, UpdateUserDto dto)
+    public void MapToUpdate(User entity, UpdateUserDto dto)
     {
         entity.DisplayName = dto.DisplayName;
         entity.Email = dto.Email;
         entity.ImageLink = dto.ImageLink;
-        return entity;
     }
 }
