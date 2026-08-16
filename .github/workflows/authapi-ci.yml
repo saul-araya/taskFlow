@@ -7,7 +7,7 @@ on:
       - 'src/AuthApi/**'
       - 'test/AuthApi/**'
       - '.github/workflows/authapi-ci.yml'
-  pull_requests:
+  pull_request:
     branches: [main]
     paths:
       - 'src/AuthApi/**'
