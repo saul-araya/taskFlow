@@ -21,4 +21,9 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\AuthApi\taskFlow.auth.Application\taskFlow.auth.Application.csproj" />
+    <ProjectReference Include="..\..\..\src\AuthApi\taskFlow.auth.Domain\taskFlow.auth.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
