@@ -1,0 +1,37 @@
+name: authapi
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/AuthApi/**'
+      - 'test/AuthApi/**'
+      - '.github/workflows/authapi-ci.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/AuthApi/**'
+      - 'test/AuthApi/**'
+      - '.github/workflows/authapi-ci.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore Backend/src/AuthApi/taskFlow.auth.Api/taskFlow.auth.Api.csproj
+
+      - name: Build
+        run: dotnet build Backend/src/AuthApi/taskFlow.auth.Api/taskFlow.auth.Api.csproj --no-restore --configuration Release
+      
+      - name: Test
+        run: dotnet test Backend/test/AuthApi/taskFlow.auth.tests/taskFlow.auth.tests.csproj
