@@ -20,6 +20,7 @@
   </Folder>
   <Folder Name="/test/" />
   <Folder Name="/test/AuthApi/">
+    <Project Path="test/AuthApi/taskFlow.auth.integrationTest/taskFlow.auth.integrationTest.csproj" />
     <Project Path="test/AuthApi/taskFlow.auth.tests/taskFlow.auth.tests.csproj" />
   </Folder>
 </Solution>
