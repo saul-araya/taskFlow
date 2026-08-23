@@ -2,16 +2,16 @@ name: authapi
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
     paths:
-      - 'src/AuthApi/**'
-      - 'test/AuthApi/**'
+      - 'Backend/src/AuthApi/**'
+      - 'Backend/test/AuthApi/**'
       - '.github/workflows/authapi-ci.yml'
   pull_request:
-    branches: [main]
+    branches: [main, dev]
     paths:
-      - 'src/AuthApi/**'
-      - 'test/AuthApi/**'
+      - 'Backend/src/AuthApi/**'
+      - 'Backend/test/AuthApi/**'
       - '.github/workflows/authapi-ci.yml'
 
 jobs:
