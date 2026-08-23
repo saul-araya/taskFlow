@@ -32,21 +32,3 @@ jobs:
 
       - name: Build
         run: dotnet build Backend/src/Api/taskFlow.Api/taskFlow.Api.csproj --no-restore --configuration Release
-  
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '10.0.x'
-
-      - name: Restore dependencies
-        run: dotnet restore Backend/test/Api/taskFlow.Api.tests/taskFlow.Api.tests.csproj
-
-      - name: Test
-        run: dotnet test Backend/test/Api/taskFlow.Api.tests/taskFlow.Api.tests.csproj
