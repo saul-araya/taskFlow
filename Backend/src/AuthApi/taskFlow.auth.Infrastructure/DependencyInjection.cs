@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using taskFlow.auth.Application.Dtos.Auth;
 using taskFlow.auth.Application.Interfaces;
 using taskFlow.auth.Domain.Repositories;
 using taskFlow.auth.Infrastructure.Persistance;
@@ -29,6 +30,8 @@ public static class DependencyInjection
 
         //Services
         services.AddSingleton<IEncriptionService, EncriptionService>();
+        services.AddScoped<IAuthProvider<GoogleAuthRequestsDto>, GoogleAuthenticationService>();
+        services.AddScoped<IAuthProvider<LocalAuthRequestDto>, LocalAuthenticationService>();
 
         return services;
     }

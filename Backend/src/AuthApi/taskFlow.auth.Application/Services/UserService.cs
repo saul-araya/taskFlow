@@ -1,6 +1,7 @@
 ﻿
 using taskFlow.auth.Application.Dtos.User;
 using taskFlow.auth.Application.Exceptions;
+using taskFlow.auth.Application.Exceptions.Messages;
 using taskFlow.auth.Application.Interfaces;
 using taskFlow.auth.Application.Mappers.Interfaces;
 using taskFlow.auth.Domain.Entities;
