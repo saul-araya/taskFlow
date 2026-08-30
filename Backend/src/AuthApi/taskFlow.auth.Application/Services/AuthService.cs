@@ -8,7 +8,8 @@ namespace taskFlow.auth.Application.Services;
 
 public class AuthService(
     IAuthProvider<GoogleAuthRequestsDto> _googleAuth,
-    IAuthProvider<LocalAuthRequestDto> _localAuth
+    IAuthProvider<LocalAuthRequestDto> _localAuth,
+    ITokenService _token
 ) : IAuthService
 {
     public async Task<AuthResDto> GoogleAuthenticate(GoogleAuthRequestsDto dto)
@@ -21,7 +22,9 @@ public class AuthService(
         var authResult = await _localAuth.Authenticate(dto);
         if (!authResult.IsSuccess || authResult.User == null)
             throw new InvalidCredentialsException(ApplicationExceptionMessages.InvalidCredentials);
-        
-        
+
+        var accessToken = _token.GenerateAccessToken(authResult.User);
+
+        throw new NotImplementedException();
     }
 }

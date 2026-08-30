@@ -61,12 +61,14 @@ public class UserService(
     private User BuildUserWithProvider(CreateUserDto dto)
     {
         var user = mapper.MapToEntity(dto);
+        user.Id = Guid.CreateVersion7();
         var provider = providerMapper.MapToEntity(dto.UserProvider);
 
         if (dto.UserProvider.Provider == Domain.Enums.AuthProvider.LOCAL)
             provider.PasswordHash = encryptionService.EncryptPassword(provider.PasswordHash ?? 
                 throw new InvalidPasswordException(DomainExceptionMessages.InvalidPassword));
 
+        provider.Id = Guid.CreateVersion7();
         user.UserProviders.Add(provider);
         return user;
     }

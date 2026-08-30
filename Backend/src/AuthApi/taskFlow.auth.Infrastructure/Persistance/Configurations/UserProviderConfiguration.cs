@@ -9,6 +9,8 @@ public class UserProviderConfiguration : IEntityTypeConfiguration<UserProvider>
 {
     public void Configure(EntityTypeBuilder<UserProvider> builder)
     {
+        builder.ToTable("user_provider");
+
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
