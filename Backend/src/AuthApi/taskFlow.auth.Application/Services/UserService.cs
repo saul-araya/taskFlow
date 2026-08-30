@@ -6,6 +6,7 @@ using taskFlow.auth.Application.Interfaces;
 using taskFlow.auth.Application.Mappers.Interfaces;
 using taskFlow.auth.Domain.Entities;
 using taskFlow.auth.Domain.Exceptions;
+using taskFlow.auth.Domain.Exceptions.Messages;
 using taskFlow.auth.Domain.Repositories;
 
 namespace taskFlow.auth.Application.Services;
