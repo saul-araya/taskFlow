@@ -1,10 +1,12 @@
 ﻿
 using taskFlow.auth.Application.Dtos.User;
 using taskFlow.auth.Application.Exceptions;
+using taskFlow.auth.Application.Exceptions.Messages;
 using taskFlow.auth.Application.Interfaces;
 using taskFlow.auth.Application.Mappers.Interfaces;
 using taskFlow.auth.Domain.Entities;
 using taskFlow.auth.Domain.Exceptions;
+using taskFlow.auth.Domain.Exceptions.Messages;
 using taskFlow.auth.Domain.Repositories;
 
 namespace taskFlow.auth.Application.Services;
@@ -60,12 +62,14 @@ public class UserService(
     private User BuildUserWithProvider(CreateUserDto dto)
     {
         var user = mapper.MapToEntity(dto);
+        user.Id = Guid.CreateVersion7();
         var provider = providerMapper.MapToEntity(dto.UserProvider);
 
         if (dto.UserProvider.Provider == Domain.Enums.AuthProvider.LOCAL)
-            provider.PasswordHash = encryptionService.EncryptPassword(provider.PasswordHash ?? 
+            provider.PasswordHash = encryptionService.EncryptPassword(dto.UserProvider.Password ?? 
                 throw new InvalidPasswordException(DomainExceptionMessages.InvalidPassword));
 
+        provider.Id = Guid.CreateVersion7();
         user.UserProviders.Add(provider);
         return user;
     }

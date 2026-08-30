@@ -11,7 +11,7 @@ public class UserProviderMapper : IUserProviderMapper
         return new UserProvider
         {
             Provider = dto.Provider,
-            ProviderUserId = dto.ProviderUserId
+            ProviderUserId = dto.ProviderUserId,
         };
     }
 }

@@ -1,7 +1,6 @@
-﻿
-using taskFlow.auth.Domain.Enums;
+﻿using taskFlow.auth.Domain.Enums;
 
-namespace taskFlow.auth.Domain.Exceptions;
+namespace taskFlow.auth.Domain.Exceptions.Messages;
 
 public static class DomainExceptionMessages
 {

@@ -9,5 +9,6 @@ public class User : BaseEntity
     public string? ImageLink { get; set; }
     public bool Active { get; set; }
 
-    public List<UserProvider> UserProviders { get; set; } = []; 
+    public List<UserProvider> UserProviders { get; set; } = [];
+    public List<RefreshToken> RefreshTokens { get; set; } = [];
 }
