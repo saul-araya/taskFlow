@@ -65,7 +65,7 @@ public class UserService(
         var provider = providerMapper.MapToEntity(dto.UserProvider);
 
         if (dto.UserProvider.Provider == Domain.Enums.AuthProvider.LOCAL)
-            provider.PasswordHash = encryptionService.EncryptPassword(provider.PasswordHash ?? 
+            provider.PasswordHash = encryptionService.EncryptPassword(dto.UserProvider.Password ?? 
                 throw new InvalidPasswordException(DomainExceptionMessages.InvalidPassword));
 
         provider.Id = Guid.CreateVersion7();

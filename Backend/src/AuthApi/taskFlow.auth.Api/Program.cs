@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using System.Text.Json.Serialization;
 using taskFlow.auth.Api.Handlers;
 using taskFlow.auth.Application;
@@ -17,7 +19,9 @@ builder.Services.AddControllers()
     });
 
 builder.Services.AddExceptionHandler<AppExceptionHandler>();
-    
+
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +33,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseExceptionHandler(_ => { });
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();

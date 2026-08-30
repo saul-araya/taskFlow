@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\Scripts\" />
-    <Folder Include="Persistance\Repositories\" />
   </ItemGroup>
 
   <ItemGroup>

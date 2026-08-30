@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using taskFlow.auth.Application.Dtos.Auth;
 using taskFlow.auth.Application.Interfaces;
 using taskFlow.auth.Domain.Repositories;
@@ -24,8 +28,30 @@ public static class DependencyInjection
             options.UseNpgsql(connectionString)
         );
 
+        var publicKey = RSA.Create();
+
+        publicKey.ImportFromPem(configuration["Jwt:PublicKey"] ?? throw new ArgumentException("Jwt:PublicKey is not configure"));
+
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = configuration["Jwt:Issuer"],
+                    ValidAudience = configuration["Jwt:Audience"],
+
+                    IssuerSigningKey = new RsaSecurityKey(publicKey)
+                };
+            });
+
         //Repositories
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         //Services

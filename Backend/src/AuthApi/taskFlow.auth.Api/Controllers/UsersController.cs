@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using taskFlow.auth.Application.Dtos.User;
 using taskFlow.auth.Application.Interfaces;
 
 namespace taskFlow.auth.Api.Controllers;
@@ -9,6 +10,12 @@ public class UsersController(
     IUserService _service    
 ) : ControllerBase
 {
+    [HttpPost]
+    public async Task<IActionResult> AddUserAsync([FromBody] CreateUserDto dto){
+        var res = await _service.AddUserAsync(dto);
+        return CreatedAtAction(nameof(GetUserById), new { res.Id }, res);
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUserById(Guid id)
     {

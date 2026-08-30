@@ -26,6 +26,7 @@ public class UserMapper : IUserMapper
             DisplayName = dto.DisplayName,
             Email = dto.Email,
             ImageLink = dto.ImageLink,
+            CreatedAt = DateTime.UtcNow,
             Active = true
         };
     }

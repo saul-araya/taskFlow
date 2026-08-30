@@ -7,4 +7,5 @@ public interface IAuthService
 {
     public Task<AuthResDto> LocalAuthenticate(LocalAuthRequestDto dto);
     public Task<AuthResDto> GoogleAuthenticate(GoogleAuthRequestsDto dto);
+    public Task LogOut(ReqLogOutDto dto);
 }
