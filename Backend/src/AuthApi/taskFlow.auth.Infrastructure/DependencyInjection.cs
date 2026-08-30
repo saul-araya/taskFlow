@@ -56,7 +56,7 @@ public static class DependencyInjection
 
         //Services
         services.AddSingleton<IEncriptionService, EncriptionService>();
-        services.AddSingleton<ITokenService, TokenService>();
+        services.AddSingleton<IJWTService, TokenService>();
         services.AddScoped<IAuthProvider<GoogleAuthRequestsDto>, GoogleAuthenticationService>();
         services.AddScoped<IAuthProvider<LocalAuthRequestDto>, LocalAuthenticationService>();
 

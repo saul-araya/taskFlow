@@ -18,4 +18,11 @@ public class RefreshTokenRepository(
     {
         return await _context.RefreshTokens.FirstOrDefaultAsync(x => x.RefreshTokenHash == tokenHash && x.IsActive);
     }
+
+    public async Task<RefreshToken?> FindRefreshTokenAndUserAsync(string tokenHash, Guid userId)
+    {
+        return await _context.RefreshTokens
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.RefreshTokenHash == tokenHash && x.IsActive && x.UserId == userId);
+    }
 }

@@ -7,4 +7,5 @@ public interface IRefreshTokenRepository
 {
     Task<RefreshToken?> FindRefreshTokenByHash(string tokenHash);
     Task AddRefreshToken(RefreshToken refreshToken);
+    Task<RefreshToken?> FindRefreshTokenAndUserAsync(string tokenHash, Guid userId);
 }

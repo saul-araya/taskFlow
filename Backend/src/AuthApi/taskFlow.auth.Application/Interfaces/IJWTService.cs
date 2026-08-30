@@ -4,7 +4,7 @@ using taskFlow.auth.Application.Dtos.User;
 
 namespace taskFlow.auth.Application.Interfaces;
 
-public interface ITokenService
+public interface IJWTService
 {
     public string GenerateAccessToken(ResUserDto dto);
     public RefreshTokenDto GenerateRefreshToken();

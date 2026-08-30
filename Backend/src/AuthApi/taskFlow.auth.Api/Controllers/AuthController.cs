@@ -22,10 +22,15 @@ public class AuthsController(
         return Ok(await _service.GoogleAuthenticate(dto));
     }
 
+    [HttpPost("/refresh")]
+    public async Task<IActionResult> RefreshAccessToken([FromBody] RefreshAccessTokenReqDto dto){
+        return Ok(await _service.RefreshAccessToken(dto));
+    }
+
     [HttpPost("/logout")]
     public async Task<IActionResult> LogOut([FromBody] ReqLogOutDto dto)
     {
         await _service.LogOut(dto);
-        return Ok();
+        return NoContent();
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace taskFlow.auth.Application.Dtos.Auth;
 
-public record ReqLogOutDto(
+public record RefreshAccessTokenReqDto(
     string RefreshToken,
     Guid UserId
 ){}

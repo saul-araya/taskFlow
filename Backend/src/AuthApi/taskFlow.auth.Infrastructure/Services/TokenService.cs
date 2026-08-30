@@ -15,7 +15,7 @@ namespace taskFlow.auth.Infrastructure.Services;
 public class TokenService(
     IConfiguration _configuration,
     IEncriptionService _encryption
-) : ITokenService
+) : IJWTService
 {
     private readonly string Issuer = _configuration["Jwt:Issuer"] ?? throw new ArgumentException("Jwt:Issuer is not configure");
     private readonly string PrivateKey = _configuration["Jwt:PrivateKey"] ?? throw new ArgumentException("Jwt:PrivateKey is not configure");
