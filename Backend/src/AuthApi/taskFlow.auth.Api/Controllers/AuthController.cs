@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using taskFlow.auth.Application.Dtos.Auth;
+using taskFlow.auth.Application.Dtos.User;
 using taskFlow.auth.Application.Interfaces;
 
 namespace taskFlow.auth.Api.Controllers;
@@ -10,27 +11,34 @@ public class AuthsController(
     IAuthService _service
 ) : ControllerBase
 {
-    [HttpPost("/local")]
+    [HttpPost("local")]
     public async Task<IActionResult> LocalAuthentication([FromBody] LocalAuthRequestDto dto)
     {
         return Ok(await _service.LocalAuthenticate(dto));
     }
 
-    [HttpPost("/google")]
+    [HttpPost("google")]
     public async Task<IActionResult> GoogleAuthentication([FromBody] GoogleAuthRequestsDto dto)
     {
         return Ok(await _service.GoogleAuthenticate(dto));
     }
 
-    [HttpPost("/refresh")]
+    [HttpPost("refresh")]
     public async Task<IActionResult> RefreshAccessToken([FromBody] RefreshAccessTokenReqDto dto){
         return Ok(await _service.RefreshAccessToken(dto));
     }
 
-    [HttpPost("/logout")]
+    [HttpPost("logout")]
     public async Task<IActionResult> LogOut([FromBody] ReqLogOutDto dto)
     {
         await _service.LogOut(dto);
         return NoContent();
+    }
+
+    [HttpPost("local/register")]
+    public async Task<IActionResult> LocalUserRegister([FromBody] CreateUserDto dto)
+    {
+        var res = await _service.LocalUserRegister(dto);
+        return CreatedAtRoute("GetUserByIdRoute", new { id = res.UserData.Id }, res);
     }
 }

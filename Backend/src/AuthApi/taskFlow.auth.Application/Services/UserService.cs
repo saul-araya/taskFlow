@@ -23,7 +23,6 @@ public class UserService(
     {
         var user = BuildUserWithProvider(dto);
         await repository.AddUserAsync(user);
-        await unitOfWork.SaveChangesAsync();
         return mapper.MapToDto(user);
     }
 
@@ -34,6 +33,19 @@ public class UserService(
         var user = await repository.FindByEmailAsync(email) 
             ?? throw new NotFoundException(ApplicationExceptionMessages.NotFound);
         return mapper.MapToDto(user);
+    }
+
+    public async Task<ResUserWithProviderDto?> FindUserByEmailAndProvidersAsync(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            throw new BadRequestDataException(String.Format(ApplicationExceptionMessages.InvalidData, nameof(email)));
+        var user = await repository.FindByEmailAndProvidersAsync(email);
+
+        if(user == null) return null;
+
+        var userDto = mapper.MapToDtoWithProvider(user);
+        userDto.UserProviders = [.. user.UserProviders.Select(providerMapper.MapToDto)];
+        return userDto;
     }
 
     public async Task<ResUserDto> FindUserByIdAsync(Guid id)

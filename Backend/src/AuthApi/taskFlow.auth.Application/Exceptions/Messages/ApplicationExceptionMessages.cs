@@ -6,4 +6,5 @@ public static class ApplicationExceptionMessages
     public const string NotFound = "Requested element not found";
     public const string InvalidCredentials = "Invalid user credentials";
     public const string UnauthorizedRefreshToken = "Invalid or revoke refresh token";
+    public const string UnauthorizedGoogleIdToken = "Invalid google user ID token";
 }

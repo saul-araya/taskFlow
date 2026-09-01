@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 using taskFlow.auth.Application.Dtos.Auth;
 using taskFlow.auth.Application.Interfaces;
 using taskFlow.auth.Domain.Repositories;
@@ -52,13 +51,14 @@ public static class DependencyInjection
         //Repositories
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+        services.AddScoped<IUserProviderRepository, UserProviderRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         //Services
         services.AddSingleton<IEncriptionService, EncriptionService>();
         services.AddSingleton<IJWTService, TokenService>();
-        services.AddScoped<IAuthProvider<GoogleAuthRequestsDto>, GoogleAuthenticationService>();
-        services.AddScoped<IAuthProvider<LocalAuthRequestDto>, LocalAuthenticationService>();
+        services.AddScoped<IAuthProvider<GoogleAuthRequestsDto, GoogleValidationResultDto>, GoogleAuthenticationService>();
+        services.AddScoped<IAuthProvider<LocalAuthRequestDto, AuthResultDto>, LocalAuthenticationService>();
 
         return services;
     }

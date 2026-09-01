@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using taskFlow.auth.Domain.Entities;
+using taskFlow.auth.Domain.Enums;
 using taskFlow.auth.Domain.Repositories;
 
 namespace taskFlow.auth.Infrastructure.Persistance.Repositories;
@@ -16,6 +17,11 @@ public class UserRepository(
     }
 
     public async Task<User?> FindByEmailAsync(string email)
+    {
+        return await context.Users.FirstOrDefaultAsync(x => x.Email == email);
+    }
+
+    public async Task<User?> FindByEmailAndProvidersAsync(string email)
     {
         return await context.Users
             .Include(x => x.UserProviders)

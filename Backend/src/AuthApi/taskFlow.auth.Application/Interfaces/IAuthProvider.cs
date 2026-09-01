@@ -3,7 +3,7 @@ using taskFlow.auth.Application.Dtos.Auth;
 
 namespace taskFlow.auth.Application.Interfaces;
 
-public interface IAuthProvider<T> where T: class
+public interface IAuthProvider<T, K> where T : class
 {
-    public Task<AuthResultDto> Authenticate(T dto);
+    public Task<K> Authenticate(T dto);
 }

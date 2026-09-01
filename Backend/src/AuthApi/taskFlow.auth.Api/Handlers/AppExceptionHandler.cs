@@ -44,6 +44,9 @@ public class AppExceptionHandler : IExceptionHandler
             InvalidPasswordException ex =>
                 BuildErrorData(StatusCodes.Status400BadRequest, ex.code, ex.Message),
 
+            UnauthorizedException ex =>
+                BuildErrorData(StatusCodes.Status401Unauthorized, ex.code, ex.Message),
+
             _ =>
                 BuildErrorData(StatusCodes.Status400BadRequest, "APP_EXCEPTION", exception.Message)
         };

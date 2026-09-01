@@ -18,6 +18,18 @@ public class UserMapper : IUserMapper
         );
     }
 
+    public ResUserWithProviderDto MapToDtoWithProvider(User entity)
+    {
+        return new ResUserWithProviderDto(
+            Id: entity.Id,
+            Name: entity.Name,
+            DisplayName: entity.DisplayName,
+            Email: entity.Email,
+            ImageLink: entity.ImageLink,
+            Active: entity.Active
+        );
+    }
+
     public User MapToEntity(CreateUserDto dto)
     {
         return new User

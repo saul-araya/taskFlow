@@ -10,11 +10,11 @@ namespace taskFlow.auth.Infrastructure.Services;
 public class LocalAuthenticationService(
     IUserRepository _userRepository,
     IEncriptionService _encryption
-) : IAuthProvider<LocalAuthRequestDto>
+) : IAuthProvider<LocalAuthRequestDto, AuthResultDto>
 {
     public async Task<AuthResultDto> Authenticate(LocalAuthRequestDto dto)
     {
-        var user = await _userRepository.FindByEmailAsync(dto.Email);
+        var user = await _userRepository.FindByEmailAndProvidersAsync(dto.Email);
 
         if (user == null) return BuildAuthResult(false, null);
 

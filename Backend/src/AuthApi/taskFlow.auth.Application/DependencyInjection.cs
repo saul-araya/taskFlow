@@ -16,6 +16,7 @@ public static class DependencyInjection
         //Services
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IUserProviderService, UserProviderService>();
 
         //Mappers
         services.AddSingleton<IUserMapper, UserMapper>();
